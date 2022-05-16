@@ -1,0 +1,37 @@
+function convertToRoman(num) {
+    let convertor = {
+        1: "I",
+        2: "II",
+        3: "III",
+        4: "IV",
+        5: "V",
+        9: "IX",
+        10: "X",
+        50: "L",
+        100: "C",
+        500: "D",
+        1000: "M"
+    }
+    // check if number is in list, if yes add it to str 
+    // if not find the greatest number lower than num and add it to str and subtract the number added in str from num
+    let str = "";
+    let keepInMind = 0;
+        while(num !== 0){
+            let i = num;
+            if(convertor[i] !== undefined){
+                str += convertor[i]; 
+                num = num - i;
+                 if(keepInMind !== 0){
+                    num = keepInMind;
+                    keepInMind = 0;
+                }
+            }else{
+                num--;
+                keepInMind++; 
+            }    
+    }
+     
+ return str;
+}
+
+console.log(convertToRoman(6)); 
