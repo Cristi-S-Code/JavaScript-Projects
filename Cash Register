@@ -1,0 +1,60 @@
+function checkCashRegister(price, cash, cid) {
+  let change = Math.round((cash-price) * 100) / 100
+  let initialChange = change;
+  let money = { 
+    "PENNY" : 0.01, 
+    "NICKEL" : 0.05, 
+    "DIME" : 0.1, 
+    "QUARTER"  : 0.25, 
+    "ONE"  : 1, 
+    "FIVE" : 5, 
+    "TEN" : 10, 
+    "TWENTY" : 20, 
+    "ONE HUNDRED" : 100 
+  };
+  // 1. Find the greatest cash note less than or equal to the rest 
+  // 2. Subtract from the rest the cash note, subtract the cash note from cash-in-drawer and concatenate it to change object
+  // 3. Repeat first two steps until the rest equals 0
+  let result = [["PENNY", 0], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]];
+  let sumOfCid = 0;
+  for( let i = 0; i < cid.length; i++){
+      sumOfCid += cid[i][1];
+  }
+  if(sumOfCid < change){
+     return {status: "INSUFFICIENT_FUNDS", change: []}
+  }
+  
+  
+      for(let i = Object.keys(money).length-1; i >=0; i--){
+        change = (Math.round(change * 100) / 100).toFixed(2)
+        
+        let currentCoin = cid[i][0]
+          if(money[currentCoin] <= change){
+
+              if(cid[i][1] > 0){ // if we have cash in drawer
+                  change -= money[currentCoin] // then substract value from change
+                  cid[i][1] -= money[currentCoin] // substract money from drawer
+                  result[i][1] += money[currentCoin] // and add them to the final result
+                  result[i][1] = parseFloat(parseFloat(result[i][1]).toFixed(2))
+                  i++            // remain in the same step in case we have multiple values to substract(like 3 bancnotes of 1 dollar)
+              }
+          }
+          
+          if (change < 0.01){ // after each iteration, if change is 0, we break the loop and return the result
+            if(sumOfCid == initialChange){
+              return {status: 'CLOSED', change: result}
+            }
+            
+            result = result.filter(cash => cash[1] !=0)
+              return {status: 'OPEN', change: result.reverse()}
+        } 
+      }
+      if(initialChange <= sumOfCid && change > 0.01) {
+            return {status: "INSUFFICIENT_FUNDS", change: []}
+          
+        }
+  
+  return change
+}
+
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]));
