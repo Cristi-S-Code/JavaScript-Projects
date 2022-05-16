@@ -1,13 +1,16 @@
 function palindrome(str) {
-  let testPalind = "";
-  let goodPalind = str.replace(/[^a-z0-9]/gi, "").toLowerCase();
-  for(let i=goodPalind.length-1; i>=0; i--){
-    testPalind +=goodPalind[i];}
-    if(goodPalind==testPalind){
-      return true;
-      }else{
-        return false;
-      }
-    }
-    
-    console.log(palindrome("Eye"))
+  let stringToCheck = str.replace(/[^a-z0-9]/gi, "").toLowerCase();
+  let reversedString = "";
+
+  for (let i = stringToCheck.length - 1; i >= 0; i--) {
+    reversedString += stringToCheck[i];
+  }
+  
+  if (stringToCheck == reversedString) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+console.log(palindrome("Eye"))

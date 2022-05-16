@@ -1,20 +1,22 @@
 function telephoneCheck(str) {
-    let numberFormat1 = /^[0-9]{3}\-[0-9]{3}\-[0-9]{4}?$/;
-    let numberFormat2 = /^[(][0-9]{3}[)][0-9]{3}\-[0-9]{4}?$/;
-    let numberFormat3 = /^[(][0-9]{3}\)\s[0-9]{3}\-[0-9]{4}?$/;
-    let numberFormat4 = /^[0-9]{3}\s[0-9]{3}\s[0-9]{4}?$/;
-    let numberFormat5 = /^[0-9]{10}?$/;
-    let numberFormat6 = /^[1]{1}\s[0-9]{3}\s[0-9]{3}\s[0-9]{4}?$/;
-    let numberFormat7 = /^[1]\s[0-9]{3}\-[0-9]{3}\-[0-9]{4}?$/;
-    let numberFormat8 = /^[1]\s[(][0-9]{3}\)\s[0-9]{3}\-[0-9]{4}?$/;
-    let numberFormat9 = /^[1][(][0-9]{3}[)][0-9]{3}\-[0-9]{4}?$/;
-    
-    for(let i = 0; i < str.length; i++){
-        if(numberFormat1.test(str) == true || numberFormat2.test(str) == true || numberFormat3.test(str) == true || numberFormat4.test(str) == true || numberFormat5.test(str) == true || numberFormat6.test(str) == true || numberFormat7.test(str) == true || numberFormat8.test(str) == true || numberFormat9.test(str) == true){
+    let allowedFormats = [
+        /^[0-9]{3}\-[0-9]{3}\-[0-9]{4}?$/,
+        /^[(][0-9]{3}[)][0-9]{3}\-[0-9]{4}?$/,
+        /^[(][0-9]{3}\)\s[0-9]{3}\-[0-9]{4}?$/,
+        /^[0-9]{3}\s[0-9]{3}\s[0-9]{4}?$/,
+        /^[0-9]{10}?$/,
+        /^[1]{1}\s[0-9]{3}\s[0-9]{3}\s[0-9]{4}?$/,
+        /^[1]\s[0-9]{3}\-[0-9]{3}\-[0-9]{4}?$/,
+        /^[1]\s[(][0-9]{3}\)\s[0-9]{3}\-[0-9]{4}?$/,
+        /^[1][(][0-9]{3}[)][0-9]{3}\-[0-9]{4}?$/
+    ];
+
+    for (let i = 0; i < allowedFormats.length; i++) {
+        if (allowedFormats[i].test(str) == true) {
             return true
-        }else{
-            return false
         }
     }
-  return true;
+
+    return false;
 }
+console.log()
