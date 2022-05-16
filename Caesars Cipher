@@ -1,0 +1,14 @@
+function rot13(str) {
+    const alphabetS = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" 
+    let newStr = "";
+    let punctuation = " !?.";
+    for(let i = 0; i < str.length; i++){
+        if(!punctuation.includes(str.charAt(i))){
+        newStr += alphabetS.charAt(alphabetS.indexOf(str.charAt(i))+13);
+        }else{
+            newStr += str.charAt(i);
+        }
+    }
+ return newStr;
+}
+ console.log(rot13("SERR PBQR PNZC"));
